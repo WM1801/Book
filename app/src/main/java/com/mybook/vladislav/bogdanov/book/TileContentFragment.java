@@ -1,5 +1,6 @@
 package com.mybook.vladislav.bogdanov.book;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -39,6 +40,16 @@ public class TileContentFragment extends Fragment {
             super(inflater.inflate(R.layout.item_tile, parent, false));
             picture = (ImageView) itemView.findViewById(R.id.tile_picture);
             name = (TextView) itemView.findViewById(R.id.tile_title);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Context context = view.getContext() ;
+                    Intent intent = new Intent(context, DetailActivity.class);
+                    intent.putExtra(DetailActivity.EXTRA_POSITION, getAdapterPosition());
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 

@@ -1,5 +1,6 @@
 package com.mybook.vladislav.bogdanov.book;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -41,6 +42,17 @@ public class ListContentFragment extends Fragment {
             avator = (ImageView) itemView.findViewById(R.id.list_avatar);
             name = (TextView) itemView.findViewById(R.id.list_title);
             description = (TextView) itemView.findViewById(R.id.list_desc);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Context context = view.getContext();
+                    Intent intent = new Intent(context, DetailActivity.class);
+                    intent.putExtra(DetailActivity.EXTRA_POSITION, getAdapterPosition());
+                    context.startActivity(intent);
+                }
+
+
+            });
         }
     }
 

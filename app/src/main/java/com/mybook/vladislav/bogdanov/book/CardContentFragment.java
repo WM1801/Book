@@ -2,6 +2,7 @@ package com.mybook.vladislav.bogdanov.book;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
@@ -18,6 +19,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.List;
 
 /**
  * Provides UI for the view with Cards.
@@ -84,6 +87,28 @@ public class CardContentFragment extends Fragment {
             shareImageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    Context context = view.getContext();
+
+                    /*Intent intent = new Intent(Intent.ACTION_SEND);
+                    PackageManager packageManager = context.getPackageManager();
+                    List activities = packageManager.queryIntentActivities(intent,0);
+                    boolean isIntentSafe = activities.size()>0;
+
+                    if(isIntentSafe){
+
+                    }*/
+
+                    /*Intent intent = new Intent(Intent.ACTION_SEND );
+                    intent.setType()
+                    String title = context.getResources().getString(R.string.app_name);
+
+                    Intent chooser = Intent.createChooser(intent, title);
+                    PackageManager packageManager = context.getPackageManager();
+                    if(intent.resolveActivity(packageManager )!= null){
+                        context.startActivity(chooser);
+                    }*/
+
                     Snackbar.make(view, "Sharearticle",
                             Snackbar.LENGTH_LONG).show();
                 }

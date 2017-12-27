@@ -19,6 +19,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,12 +29,27 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MAINACTIVITY_BOOK";
     private DrawerLayout mDrawerLayout;
+    private static final String KEY_DRAW_LAYOUT = "key_darw_layout";
+    private int varSaveInstateExample = 0;
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Log.i(TAG, "onSaveInstanceState()");
+        outState.putInt(KEY_DRAW_LAYOUT, varSaveInstateExample);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_layout);
+
+        if(savedInstanceState!=null)
+        {
+            varSaveInstateExample = savedInstanceState.getInt(KEY_DRAW_LAYOUT, 0);
+        }
 
         //create navigation dtawer and inflate layout
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -75,8 +91,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         if(Build.VERSION.SDK_INT < 21) {
@@ -92,7 +106,10 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabs = (TabLayout) findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
 
+        Log.d(TAG, "onCreate() called");
+
     }
+
 
     // Add Fragments to Tabs
     private void setupViewPager(ViewPager viewPager) {
@@ -153,5 +170,35 @@ public class MainActivity extends AppCompatActivity {
             mDrawerLayout.openDrawer(GravityCompat.START);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart() called");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop() called");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy() called");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.d(TAG, "onPause() called");
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.d(TAG, "onResume() callled");
     }
 }
